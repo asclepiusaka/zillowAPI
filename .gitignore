@@ -72,10 +72,11 @@ target/
 
 # pyenv
 .python-version
-
+zillowenv/
 # celery beat schedule file
 celerybeat-schedule
-
+# IDE
+.idea/
 # SageMath parsed files
 *.sage.py
 
