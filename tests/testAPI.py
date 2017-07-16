@@ -82,6 +82,10 @@ class ZillowTest(unittest.TestCase):
         self.assertIsInstance(a.results,list)
         self.assertIsInstance(a.results[0],ZillowAPI.DeepZestimateData)
 
+    def test_GetUpdatedPropertyDetails(self):
+        a = zillow().GetUpdatedPropertyDetails(self.apikey,48749425)
+        self.assertIsInstance(a,ZillowAPI.UpdatedPropertyDetails)
+
 
 class DataTypeTest(unittest.TestCase):
     def setUp(self):

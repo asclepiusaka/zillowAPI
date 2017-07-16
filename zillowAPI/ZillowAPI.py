@@ -111,6 +111,21 @@ class zillow():
 
         return DeepSearchResultData(result_list,content)
 
+    def GetUpdatedPropertyDetails(self,key,zpid):
+        url = 'GetUpdatedPropertyDetails.htm'
+        payload = {
+            'zws-id':key,
+            'zpid':zpid
+        }
+
+        content = self.get_data(url,payload)
+        etree = ET.fromstring(content)
+
+        if int(etree.find('./message/code').text) is not 0:
+            raise ZillowRequestError(int(etree.find('./message/code').text),
+                                     etree.find('./message/text').text)
+
+        return UpdatedPropertyDetails(etree.find('./response'),content)
 
     def get_data(self,url,payload):
         """
@@ -222,3 +237,24 @@ class DeepComparableResult(ZillowData):
         self.comps = []
         for comps in comps_list:
             self.comps.append(DeepComparableData(comps))
+
+class UpdatedPropertyDetails(ZillowData):
+    def __init__(self,etree,content):
+        super(UpdatedPropertyDetails, self).__init__(content)
+        self.address = address(etree.find('./address'))
+        self.zpid = etree.find('./zpid').text
+        self.usecode = etree.find('./editedFacts/useCode').text
+        self.bedrooms = etree.find('./editedFacts/bedrooms').text
+        self.bathrooms = etree.find('./editedFacts/bathrooms').text
+        self.finished_size = etree.find('./editedFacts/finishedSqFt').text
+        self.lot_size = etree.find('./editedFacts/lotSizeSqFt').text
+        self.year_built = etree.find('./editedFacts/yearBuilt').text
+        self.year_updated = etree.find('./editedFacts/yearUpdated').text
+        self.num_floor = etree.find('./editedFacts/numFloors').text
+        self.basement = etree.find('./editedFacts/basement').text
+        self.roof = etree.find('./editedFacts/roof').text
+        self.view = etree.find('./editedFacts/view').text
+        self.parkingType = etree.find('./editedFacts/parkingType').text
+        self.heating_sources = etree.find('./editedFacts/heatingSources').text
+        self.heating_system = etree.find('./editedFacts/heatingSystem').text
+        self.rooms = etree.find('./editedFacts/rooms').text
