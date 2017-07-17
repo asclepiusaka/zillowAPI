@@ -24,7 +24,7 @@ class ZillowTest(unittest.TestCase):
             f.write(r)
 
     def test_GetZestimate(self):
-        a = zillow().GetZestimate(self.apikey,2146876387,True)
+        a = zillow().GetZestimate(self.apikey,zpid=2146876387,rentzestimate=True)
         self.assertIsInstance(a,ZillowAPI.ZestimateData)
         self.assertIsInstance(a.address,ZillowDataType.address)
         self.assertIsInstance(a.zestimate,ZillowDataType.zestimate)
