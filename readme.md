@@ -12,7 +12,15 @@ a python practice project, two old implementations are referenced. following API
 - GetDeepSearch
 - GetUpdatedPropertyDetails
 
-
+# Install
+use pip to install this package
+```buildoutcfg
+[shell]$ pip install zillowAPI 
+```
+or download this repo and run the setup.py script
+```buildoutcfg
+[shell]$ python setup.py install
+```
 # Usage:
 to use this library,import zillow class and create an instance first;
 ```buildoutcfg
